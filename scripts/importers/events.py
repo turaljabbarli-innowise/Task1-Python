@@ -2,12 +2,9 @@ import json
 import logging
 import psycopg2
 from typing import List, Dict, Any
-from psycopg2.extensions import connection
+from .base import BaseImporter
 
-class EventImporter:
-    def __init__(self, db_conn: connection):
-        self.conn = db_conn
-
+class EventImporter(BaseImporter):
     def import_data(self, file_path: str) -> None:
         try:
             with open(file_path, 'r') as file:
@@ -31,7 +28,7 @@ class EventImporter:
                     ON CONFLICT (event_id) DO NOTHING;
                 """, (event_id, device_id, timestamp, json.dumps(details)))
             except psycopg2.Error as e:
-                logging.warning(f"Skipping event {event_id}: {e.pgerror}")
+                logging.warning(f"Skipping event {event_id}: {e.pgerror.strip()}")
                 self.conn.rollback()
         self.conn.commit()
         cursor.close()

@@ -2,12 +2,9 @@ import json
 import logging
 import psycopg2
 from typing import List, Dict, Any, Set
-from psycopg2.extensions import connection
+from .base import BaseImporter
 
-class LocationImporter:
-    def __init__(self, db_conn: connection):
-        self.conn = db_conn
-
+class LocationImporter(BaseImporter):
     def import_data(self, file_path: str) -> None:
         try:
             with open(file_path, 'r') as file:
