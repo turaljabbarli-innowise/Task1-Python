@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from config import Config
 from database import DatabaseConnector
 from importers import LocationImporter, DeviceImporter, EventImporter
 
@@ -17,13 +18,11 @@ logging.basicConfig(
 )
 
 def main() -> None:
-    db_config = {
-        "dbname": "iot_db",
-        "user": "myuser",
-        "password": "mypassword",
-        "host": "localhost",
-        "port": "5432"
-    }
+    db_config = Config.get_db_params()
+
+    if not all([db_config["dbname"], db_config["user"], db_config["password"]]):
+        logging.critical("Missing database credentials.")
+        return
 
     connector = DatabaseConnector(db_config)
 
