@@ -1,3 +1,12 @@
+"""Standalone script for testing query execution.
+
+This module provides a quick way to test all queries without
+going through the full CLI. Exports results to JSON format.
+
+Note:
+    Requires database to be running and populated with data.
+"""
+
 from config import Config
 from database import DatabaseManager
 from exporters import JsonExporter
@@ -13,7 +22,12 @@ from queries import (
 )
 
 
-def main():
+def main() -> None:
+    """Execute all queries and export results to JSON.
+
+    Connects to the database, runs all query classes, and
+    saves results to output/results.json.
+    """
     db = DatabaseManager(Config.get_db_params())
     db.connect()
 

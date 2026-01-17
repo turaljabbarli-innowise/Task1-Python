@@ -1,12 +1,38 @@
+"""Query for finding the deepest sublocation for each root location.
+
+This module uses recursive CTEs to traverse the location hierarchy
+and find the lowest level sublocation for each top-level location.
+"""
+
 from typing import List
 from .base import BaseQuery
 
 
 class LowestSublocationsQuery(BaseQuery):
+    """Query to find the deepest sublocation for each location hierarchy.
+
+    Uses a recursive Common Table Expression (CTE) to traverse the
+    location tree and identify the maximum depth sublocation for
+    each root location.
+    """
+
     def get_query_name(self) -> str:
+        """Return the query identifier.
+
+        Returns:
+            String 'lowest_sublocations'.
+        """
         return "lowest_sublocations"
 
     def get_sql(self) -> str:
+        """Return SQL using recursive CTE to find deepest sublocations.
+
+        The recursive CTE builds the complete hierarchy with depth tracking,
+        then selects only the maximum depth nodes for each root.
+
+        Returns:
+            SQL query with recursive CTE for hierarchy traversal.
+        """
         return """
             WITH RECURSIVE hierarchy AS (
                 SELECT 
@@ -36,4 +62,9 @@ class LowestSublocationsQuery(BaseQuery):
         """
 
     def get_columns(self) -> List[str]:
+        """Return the result column names.
+
+        Returns:
+            List containing 'location_name' and 'lowest_sublocation'.
+        """
         return ["location_name", "lowest_sublocation"]
