@@ -149,6 +149,8 @@ class TestDatabaseManagerFetch:
         connected_db.conn.cursor.return_value.__enter__ = Mock(return_value=mock_cursor)
         connected_db.conn.cursor.return_value.__exit__ = Mock(return_value=False)
 
+        connected_db.fetch_all("SELECT * FROM test WHERE id = %s", (1,))
+
         mock_cursor.execute.assert_called_with("SELECT * FROM test WHERE id = %s", (1,))
 
     def test_fetch_raises_when_not_connected(self):
