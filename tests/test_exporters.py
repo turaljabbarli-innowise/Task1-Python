@@ -1,6 +1,6 @@
 import pytest
 import json
-from unittest.mock import patch, mock_open, Mock
+from unittest.mock import patch, mock_open
 from decimal import Decimal
 from scripts.exporters.json_exporter import JsonExporter, DecimalEncoder
 from scripts.exporters.xml_exporter import XmlExporter

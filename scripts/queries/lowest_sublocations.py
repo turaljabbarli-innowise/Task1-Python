@@ -35,7 +35,7 @@ class LowestSublocationsQuery(BaseQuery):
         """
         return """
             WITH RECURSIVE hierarchy AS (
-                SELECT 
+                SELECT
                     location_id,
                     location_name,
                     location_id AS root_id,
@@ -45,7 +45,7 @@ class LowestSublocationsQuery(BaseQuery):
 
                 UNION ALL
 
-                SELECT 
+                SELECT
                     child.location_id,
                     child.location_name,
                     parent.root_id,

@@ -23,14 +23,14 @@ logging.basicConfig(
     force=True
 )
 
-import sys
+import sys  # noqa: E402
 
 sys.path.insert(0, str(BASE_DIR / "scripts"))
 
-from config import Config
-from database import DatabaseManager
-from file_handler import FileHandler
-from importers import LocationImporter, DeviceImporter, EventImporter
+from config import Config  # noqa: E402
+from database import DatabaseManager  # noqa: E402
+from file_handler import FileHandler  # noqa: E402
+from importers import LocationImporter, DeviceImporter, EventImporter  # noqa: E402
 
 
 def main() -> None:

@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 from scripts.database import DatabaseManager
 
 
@@ -148,8 +148,6 @@ class TestDatabaseManagerFetch:
         mock_cursor.fetchall.return_value = [("filtered",)]
         connected_db.conn.cursor.return_value.__enter__ = Mock(return_value=mock_cursor)
         connected_db.conn.cursor.return_value.__exit__ = Mock(return_value=False)
-
-        result = connected_db.fetch_all("SELECT * FROM test WHERE id = %s", (1,))
 
         mock_cursor.execute.assert_called_with("SELECT * FROM test WHERE id = %s", (1,))
 

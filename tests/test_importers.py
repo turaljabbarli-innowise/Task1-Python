@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 from scripts.importers.devices import DeviceImporter
 from scripts.importers.events import EventImporter
 from scripts.importers.locations import LocationImporter

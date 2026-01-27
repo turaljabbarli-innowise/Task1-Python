@@ -82,7 +82,7 @@ class BaseImporter(ABC):
                     data=transformed_data,
                     conflict_column=self.get_conflict_column()
                 )
-            except Exception as e:
+            except Exception:
                 self.db.rollback()
                 raise
         self.db.commit()

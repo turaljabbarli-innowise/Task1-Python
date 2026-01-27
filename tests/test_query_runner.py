@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 from scripts.query_runner import QueryRunner
 
 
