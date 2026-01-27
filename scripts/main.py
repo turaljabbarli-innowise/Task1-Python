@@ -1,3 +1,13 @@
+"""Legacy ETL pipeline entry point.
+
+This module provides the original data loading functionality.
+For the full CLI application with query execution and export,
+use run.py instead.
+
+Note:
+    This script expects JSON files in the jsons/ directory.
+"""
+
 import logging
 from pathlib import Path
 
@@ -13,17 +23,22 @@ logging.basicConfig(
     force=True
 )
 
-import sys
+import sys  # noqa: E402
 
 sys.path.insert(0, str(BASE_DIR / "scripts"))
 
-from config import Config
-from database import DatabaseManager
-from file_handler import FileHandler
-from importers import LocationImporter, DeviceImporter, EventImporter
+from config import Config  # noqa: E402
+from database import DatabaseManager  # noqa: E402
+from file_handler import FileHandler  # noqa: E402
+from importers import LocationImporter, DeviceImporter, EventImporter  # noqa: E402
 
 
 def main() -> None:
+    """Load data from JSON files into PostgreSQL database.
+
+    Reads locations, devices, and events from the jsons/ directory
+    and imports them into their respective database tables.
+    """
     db_config = Config.get_db_params()
     db = DatabaseManager(db_config)
 
